@@ -1,37 +1,6 @@
-# day 15 - coffee machine
-
-MENU = {
-    "espresso": {
-        "ingredients": {
-            "water": 50,
-            "coffee": 18,
-        },
-        "cost": 1.5,
-    },
-    "latte": {
-        "ingredients": {
-            "water": 200,
-            "milk": 150,
-            "coffee": 24,
-        },
-        "cost": 2.5,
-    },
-    "cappuccino": {
-        "ingredients": {
-            "water": 250,
-            "milk": 100,
-            "coffee": 24,
-        },
-        "cost": 3.0,
-    }
-}
+from menu import menu, resources, welcome_text
 
 profit = 0
-resources = {
-    "water": 300,
-    "milk": 200,
-    "coffee": 100,
-}
 
 
 def is_resource_sufficient(order_ingredients):
@@ -76,7 +45,7 @@ def make_coffee(drink_name, order_ingredients):
 is_on = True
 
 while is_on:
-    choice = input("Welcome to the coffee maker!\n"
+    choice = input(f"{welcome_text}\n"
                    "for coffee, type 'espresso/latte/cappuccino'\n"
                    "for resources, type 'report'\n"
                    "to end, type 'off': ")
@@ -88,7 +57,7 @@ while is_on:
         print(f"Coffee: {resources['coffee']}g")
         print(f"Money: ${profit}")
     elif choice == "espresso" or choice == "latte" or choice == "cappuccino":
-        drink = MENU[choice]
+        drink = menu[choice]
         if is_resource_sufficient(drink["ingredients"]):
             payment = process_coins()
             if is_transaction_successful(payment, drink["cost"]):
